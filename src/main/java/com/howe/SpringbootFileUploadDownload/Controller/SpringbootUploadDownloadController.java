@@ -43,13 +43,17 @@ public class SpringbootUploadDownloadController {
     }
 
     @GetMapping(value = "/edituser/{userId}")
-    public String edituser(@PathVariable Long userId, Model model){
+    public String edituser(@PathVariable Long userId, Model model) {
+        User user = userService.findById(userId);
+        List<UserFiles> userFiles = userService.findFilesByUserId(userId);
         List<User> users = userService.getAllUsers();
-        model.addAttribute("users",users);
-        model.addAttribute("user", new User());
-        model.addAttribute("userfiles", new ArrayList<UserFiles>());
-        model.addAttribute("isAdd", true);
+
+        model.addAttribute("users", users);
+        model.addAttribute("user", user);
+        model.addAttribute("userfiles", userFiles);
+        model.addAttribute("isAdd", false);
         return "view/user";
+    }
 
 
 

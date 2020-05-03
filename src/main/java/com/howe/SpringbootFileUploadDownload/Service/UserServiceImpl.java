@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -54,5 +55,19 @@ public class UserServiceImpl implements UserService  {
             }
         }
         return dbUser;
+    }
+
+    @Override
+    public User findById(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isPresent()){
+            return user.get();
+        }
+        return null;
+    }
+
+    @Override
+    public List<UserFiles> findFilesByUserId(Long userId) {
+        return userFileRepository.findFilesByUserId(userId);
     }
 }
