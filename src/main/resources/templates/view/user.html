@@ -5,6 +5,45 @@
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <style>
+        .imagecontainer {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            opacity: 0;
+            transition: .3s ease;
+            border-radius: 50%;
+        }
+
+        .imagecontainer:hover .overlay {
+            opacity: 1;
+
+        }
+
+        .icon {
+            color: white;
+            font-size: 40px;
+            position: absolute;
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .fa trash: hover {
+            color: red;
+        }
+    </style>
 
 
 </head>
@@ -40,6 +79,22 @@
                     <input type="file", class="form-control" id="files" placeholder="Upload Files" th:field="*{files}" multiple="multiple">
                 </div>
                 <div class="form-group">
+                    <span th:each="file, itrStat : ${userfiles}" class="imagecontainer" th:id="'imageindex'+${itrStat.index}">
+                        <img th:src="@{'/images/'+${file.modifiedFileName}}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class="image" th:if="${file.fileExtension != 'pdf' and file.fileExtension != 'xls' and file.fileExtension != 'xlsx'">
+                        <img th:src="@{'/img/Pdf_icon_file.png}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'pdf' }">
+                        <img th:src="@{'/img/excel.png}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'xls' or file.fileExtension == 'xlsx' }">
+                        <span class="overlay">
+                            <a href="#" class="icon image-confirm-delete" title="image delete" th:attr="data-id=${itrStat.index}, data-name=${file.modifiedFileName}">
+                                <i class="fa fa-trash" style="color:red;"></i>
+                            </a>
+                        </span>
+                    </span>
+                </div>
+
+
+                <input type="hidden" class="form-control" th:field="*{removeImages}" id="removeImages">
+                <input type="hidden" class="form-control" th:field="*{id}">
+                <div class="form-group">
                     <button type="submit" class="btn btn-primary" th:text="${isAdd}?'Save':'Update'"></button>
                 </div>
             </form>
@@ -66,7 +121,7 @@
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.phoneNumber}"></td>
                     <td>
-                        <a th:href="@{'/edituser/'+$user.id}"><i class="fa fa-edit" style="font-size:21px;"></i></a>
+                        <a th:href="@{'/edituser/'+${user.id}}"><i class="fa fa-edit" style="font-size:21px;"></i></a>
                     </td>
                 </tr>
                 </tbody>
@@ -77,6 +132,20 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="text/javascript">
+    $(function(){
+        var images = [];
+        $('.image-confirm-delete').on('click', function(e){
+            e.preventDefault();
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            images.push(name);
+            $('#removeImages').val(images);
+            $('#imageindex'+id).hide();
+        })
+    });
+</script>
+
 
 </body>
 </html>
