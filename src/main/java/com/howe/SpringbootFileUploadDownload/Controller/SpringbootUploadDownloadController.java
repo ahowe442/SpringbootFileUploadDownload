@@ -38,7 +38,6 @@ public class SpringbootUploadDownloadController {
             model.addAttribute("errormessage", "User has not been not saved, Please try again");
             model.addAttribute("user", user);
             return "view/user";
-
         }
     }
 

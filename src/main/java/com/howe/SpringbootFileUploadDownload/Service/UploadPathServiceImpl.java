@@ -19,7 +19,7 @@ public class UploadPathServiceImpl implements UploadPathService {
         if(!exists){
             new File(context.getRealPath("/"+path+"/")).mkdir();
         }
-        String modifiedFilePath = context.getRealPath("/"+File.separator+modifiedFileName);
+        String modifiedFilePath = context.getRealPath("/"+path+"/"+File.separator+modifiedFileName);
         File file =  new File(modifiedFilePath);
         return file;
     }
