@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -41,6 +42,14 @@ public class SpringbootUploadDownloadController {
         }
     }
 
+    @GetMapping(value = "/edituser/{userId}")
+    public String edituser(@PathVariable Long userId, Model model){
+        List<User> users = userService.getAllUsers();
+        model.addAttribute("users",users);
+        model.addAttribute("user", new User());
+        model.addAttribute("userfiles", new ArrayList<UserFiles>());
+        model.addAttribute("isAdd", true);
+        return "view/user";
 
 
 
