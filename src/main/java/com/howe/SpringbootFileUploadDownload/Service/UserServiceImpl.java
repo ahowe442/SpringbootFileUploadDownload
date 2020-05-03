@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService  {
         if(dbUser!=null && user.getFiles()!=null && user.getFiles().size()>0){
             for(MultipartFile file : user.getFiles()){
                 String fileName = file.getOriginalFilename();
-                String modifiedFileName = FilenameUtils.getBaseName(fileName)+" "+System.currentTimeMillis()+"."+FilenameUtils.getExtension(fileName);
+                String modifiedFileName = FilenameUtils.getBaseName(fileName)+"_"+System.currentTimeMillis()+"."+FilenameUtils.getExtension(fileName);
                 File storeFile = uploadPathService.getFilePath(modifiedFileName, "images");
                 if(storeFile!=null){
                     try{
