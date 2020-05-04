@@ -36,7 +36,7 @@ public class SpringbootUploadDownloadController {
             redirectAttributes.addFlashAttribute("successmessage", "User has been saved successfully");
             return "redirect:/";
         }else{
-            model.addAttribute("errormessage", "User has not been not saved, Please try again");
+            model.addAttribute("errormessage", "User has not been saved, Please try again");
             model.addAttribute("user", user);
             return "view/user";
         }
@@ -53,6 +53,19 @@ public class SpringbootUploadDownloadController {
         model.addAttribute("userfiles", userFiles);
         model.addAttribute("isAdd", false);
         return "view/user";
+    }
+
+    @PostMapping(value="/update")
+    public String update(@ModelAttribute User user, RedirectAttributes redirectAttributes, Model model){
+        User dbUser = userService.update(user);
+        if(dbUser!=null){
+            redirectAttributes.addFlashAttribute("successmessage", "User has been updated successfully");
+            return "redirect:/";
+        }else{
+            model.addAttribute("errormessage", "User has not been updated, Please try again");
+            model.addAttribute("user", user);
+            return "view/user";
+        }
     }
 
 

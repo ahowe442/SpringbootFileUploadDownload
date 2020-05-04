@@ -14,4 +14,6 @@ public interface UserService {
     User findById(Long userId);
 
     List<UserFiles> findFilesByUserId(Long userId);
+
+    User update(User user);
 }

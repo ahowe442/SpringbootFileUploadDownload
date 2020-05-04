@@ -81,8 +81,10 @@
                 <div class="form-group">
                     <span th:each="file, itrStat : ${userfiles}" class="imagecontainer" th:id="'imageindex'+${itrStat.index}">
                         <img th:src="@{'/images/'+${file.modifiedFileName}}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class="image" th:if="${file.fileExtension != 'pdf' and file.fileExtension != 'xls' and file.fileExtension != 'xlsx'}">
-                        <img th:src="@{'/img/Pdf_icon_file.png}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'pdf' }">
-                        <img th:src="@{'/img/excel.png}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'xls' or file.fileExtension == 'xlsx' }">
+                        <img th:src="@{'/img/Pdf_icon_file.png'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'pdf'}">
+                        <img th:src="@{'/img/excel.png'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'xls' or file.fileExtension == 'xlsx'}">
+                        <img th:src="@{'/img/word.png'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'doc' or file.fileExtension == 'docx'}">
+                        <img th:src="@{'/img/ppt.png'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'ppt' or file.fileExtension == 'pptx'}">
                         <span class="overlay">
                             <a href="#" class="icon image-confirm-delete" title="image delete" th:attr="data-id=${itrStat.index}, data-name=${file.modifiedFileName}">
                                 <i class="fa fa-trash" style="color:red;"></i>
