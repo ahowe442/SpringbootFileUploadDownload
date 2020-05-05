@@ -18,4 +18,8 @@ public interface UserFileRepository extends CrudRepository<UserFiles, Long> {
     @Modifying
     @Query("delete from UserFiles as f where f.user.id = ?1 and f.modifiedFileName in (?2) ")
     void deleteFilesByUserAndImageNames(Long id, List<String> removeImages);
+
+    @Modifying
+    @Query("delete from UserFiles as f where f.user.id = ?1")
+    void deleteFilesByUserId(Long userId);
 }
