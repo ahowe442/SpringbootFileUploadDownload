@@ -1,5 +1,6 @@
 package com.howe.SpringbootFileUploadDownload.Controller;
 
+import com.howe.SpringbootFileUploadDownload.Model.UserFiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 @Controller
 public class SpringFileDownloadController {
@@ -42,4 +44,14 @@ public class SpringFileDownloadController {
             }
         }
     }
+
+    @GetMapping(value="/downloadfileszip/{userId}")
+    public void downloadfilesaszip(@PathVariable Long userId, HttpServletResponse response) {
+        List<UserFiles> userFiles = userService.findFilesByUserId(userId);
+        if(userFiles!=null && userFiles.size()>0){
+            downloadzipfiles(userFiles, "files.zip", response);
+        }
+    }
 }
+
+

@@ -128,12 +128,10 @@ public class UserServiceImpl implements UserService  {
            }
            userFileRepository.deleteFilesByUserId(userId);
         }
-
     }
 
     @Override
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
-
     }
 }
