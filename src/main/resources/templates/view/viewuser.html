@@ -5,6 +5,7 @@
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <style>
         .imagecontainer {
             position: relative;
@@ -84,16 +85,6 @@
                     </span>
                 </div>
 
-
-                <input type="hidden" class="form-control" th:field="*{removeImages}" id="removeImages">
-                <input type="hidden" class="form-control" th:field="*{id}">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" th:text="${isAdd}?'Save':'Update'"></button>
-                </div>
-            </form>
-            <hr/>
-        </div>
-
         <div class="col-md-12">
             <h2>All Users</h2>
             <div style="margin-top:20px;"></div>
@@ -114,9 +105,9 @@
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.phoneNumber}"></td>
                     <td>
-                        <a th:href="@{'/viewuser/'+${user.id}}"><i class="fas fa-eye" style="font-size:21px;"></i></a>
+                        <a th:href="@{'/viewuser/'+${user.id}}"><i class="fa fa-eye" style="font-size:21px;"></i></a>
                         <a th:href="@{'/edituser/'+${user.id}}"><i class="fa fa-edit" style="font-size:21px;"></i></a>
-                        <a href="#" th:attr="data-id=${user.id}, data-name=${user.firstName+' '+user.lastName}" class="confirm-delete">
+                        <a href="#" class="confirm-delete" th:attr="data-id=${user.id}, data-name=${user.firstName+' '+user.lastName}" >
                             <i class="fa fa-trash" style="font-size:21px;color:red;"></i>
                         </a>
                     </td>
