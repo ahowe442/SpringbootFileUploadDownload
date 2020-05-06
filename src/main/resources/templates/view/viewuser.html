@@ -70,6 +70,7 @@
                     <td th:text="${user.phoneNumber}"></td>
                 </tr>
             </table>
+            <a th:href="@{'/downloadfilesaszip/'+${user.id}}"></a>
                 <div class="form-group">
                     <span th:each="file, itrStat : ${userfiles}" class="imagecontainer" th:id="'imageindex'+${itrStat.index}">
                         <img th:src="@{'/images/'+${file.modifiedFileName}}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class="image" th:if="${file.fileExtension != 'pdf' and file.fileExtension != 'xls' and file.fileExtension != 'xlsx'}">
