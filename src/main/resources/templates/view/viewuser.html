@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:float="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title></title>
@@ -70,7 +70,7 @@
                     <td th:text="${user.phoneNumber}"></td>
                 </tr>
             </table>
-            <a th:href="@{'/downloadfilesaszip/'+${user.id}}"></a>
+            <a th:href="@{'/downloadfilesaszip/'+${user.id}}" style="float:right;"><i class="fa fa-file-archie-o" aria-hidden="true" style="font-size:32px;"></i></a>
                 <div class="form-group">
                     <span th:each="file, itrStat : ${userfiles}" class="imagecontainer" th:id="'imageindex'+${itrStat.index}">
                         <img th:src="@{'/images/'+${file.modifiedFileName}}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class="image" th:if="${file.fileExtension != 'pdf' and file.fileExtension != 'xls' and file.fileExtension != 'xlsx'}">
@@ -79,7 +79,7 @@
                         <img th:src="@{'/img/word.png'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'doc' or file.fileExtension == 'docx'}">
                         <img th:src="@{'/img/ppt.png'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'ppt' or file.fileExtension == 'pptx'}">
                         <span class="overlay">
-                            <a th:href="@{'/downloadfile/'+${file.filename}+'/'+${file.modifiedFileName}}"  class="icon" title="image delete" >
+                            <a th:href="@{'/downloadfile/'+${file.filename}+'/'+${file.modifiedFileName}}"  class="icon" title="image delete" th:attr="data-id=${itrStat.index}, data-name=${file.modifiedFileName}">
                                 <i class="fa fa-download" style="color:red;"></i>
                             </a>
                         </span>
