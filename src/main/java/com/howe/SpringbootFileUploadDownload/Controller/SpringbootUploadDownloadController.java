@@ -26,6 +26,7 @@ public class SpringbootUploadDownloadController {
         model.addAttribute("isAdd", true);
         return "view/user";
     }
+
     @PostMapping(value="/save")
     public String save(@ModelAttribute User user, RedirectAttributes redirectAttributes, Model model){
         User dbUser = userService.save(user);

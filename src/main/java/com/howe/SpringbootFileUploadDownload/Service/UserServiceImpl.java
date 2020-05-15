@@ -22,10 +22,17 @@ import java.util.Optional;
 @Transactional
 public class UserServiceImpl implements UserService  {
 
-    @Autowired private UserRepository userRepository;
-    @Autowired private UploadPathService uploadPathService;
-    @Autowired private UserFileRepository userFileRepository;
-    @Autowired private ServletContext context;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UploadPathService uploadPathService;
+
+    @Autowired
+    private UserFileRepository userFileRepository;
+
+    @Autowired
+    private ServletContext context;
 
 
     @Override

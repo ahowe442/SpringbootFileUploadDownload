@@ -62,7 +62,7 @@
                 <strong th:text="${errormessage}">Success!</strong> Indicates a successful or positive action.
             </div>
 
-            <form action="#" th:action="@{${isAdd}?'/save':'update'}" th:object="${user}" method="post" enctype="multipart/form-data">
+            <form action="#" th:action="@{${isAdd}?'/save':'/update'}" th:object="${user}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <input type="text", class="form-control" id="firstName" placeholder="First Name" th:field="*{firstName}">
                 </div>
@@ -80,11 +80,14 @@
                 </div>
                 <div class="form-group">
                     <span th:each="file, itrStat : ${userfiles}" class="imagecontainer" th:id="'imageindex'+${itrStat.index}">
-                        <img th:src="@{'/images/'+${file.modifiedFileName}}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class="image" th:if="${file.fileExtension != 'pdf' and file.fileExtension != 'xls' and file.fileExtension != 'xlsx'}">
+                        <img th:src="@{'/images/'+${file.modifiedFileName}}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class="image"
+                             th:if="${file.fileExtension != 'pdf' and file.fileExtension != 'xls' and file.fileExtension != 'xlsx' and file.fileExtension != 'doc' and file.fileExtension != 'docx' and file.fileExtension != 'ppt' and file.fileExtension != 'pptx' and file.fileExtension != 'jpg' and file.fileExtension != 'png'}">
+
                         <img th:src="@{'/img/Pdf_icon_file.png'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'pdf'}">
                         <img th:src="@{'/img/excel.png'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'xls' or file.fileExtension == 'xlsx'}">
                         <img th:src="@{'/img/word.png'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'doc' or file.fileExtension == 'docx'}">
                         <img th:src="@{'/img/ppt.png'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'ppt' or file.fileExtension == 'pptx'}">
+                        <img th:src="@{'/img/camera.jpg'}" style="width:80px; height:80px; border-radius: 50%; margin-left:10px;" class= "image" th:if="${file.fileExtension == 'png' or file.fileExtension == 'jpg'}">
                         <span class="overlay">
                             <a href="#" class="icon image-confirm-delete" title="image delete" th:attr="data-id=${itrStat.index}, data-name=${file.modifiedFileName}">
                                 <i class="fa fa-trash" style="color:red;"></i>
@@ -167,7 +170,7 @@
                 <p>Do you want to delete this (<span id="modal-name"></span>) record?</p>
             </div>
             <div class="modal-footer">
-                <a id="idModalLink" href="#" class="btn btn-primary"></a>
+                <a id="idModalLink" href="#" class="btn btn-primary">Yes</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
             </div>
         </div>
@@ -175,5 +178,7 @@
 </div>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
